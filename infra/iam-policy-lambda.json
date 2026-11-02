@@ -1,0 +1,55 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "BedrockInvocarModelos",
+      "Effect": "Allow",
+      "Action": ["bedrock:InvokeModel"],
+      "Resource": [
+        "arn:aws:bedrock:*::foundation-model/amazon.nova-lite-v1:0",
+        "arn:aws:bedrock:*::foundation-model/amazon.titan-embed-text-v2:0",
+        "arn:aws:bedrock:us-east-1:ACCOUNT_ID:inference-profile/us.amazon.nova-lite-v1:0"
+      ]
+    },
+    {
+      "Sid": "S3DocumentosOriginales",
+      "Effect": "Allow",
+      "Action": ["s3:PutObject", "s3:GetObject"],
+      "Resource": "arn:aws:s3:::ic7-rag-docs-ACCOUNT_ID/documents/*"
+    },
+    {
+      "Sid": "S3ListarDocumentos",
+      "Effect": "Allow",
+      "Action": ["s3:ListBucket"],
+      "Resource": "arn:aws:s3:::ic7-rag-docs-ACCOUNT_ID",
+      "Condition": {"StringLike": {"s3:prefix": ["documents/*"]}}
+    },
+    {
+      "Sid": "S3VectorsIndice",
+      "Effect": "Allow",
+      "Action": [
+        "s3vectors:PutVectors",
+        "s3vectors:QueryVectors",
+        "s3vectors:GetVectors",
+        "s3vectors:ListVectors",
+        "s3vectors:DeleteVectors"
+      ],
+      "Resource": "arn:aws:s3vectors:us-east-1:ACCOUNT_ID:bucket/ic7-rag-vectors-ACCOUNT_ID/index/docs-index"
+    },
+    {
+      "Sid": "DynamoHistorialYSolicitudes",
+      "Effect": "Allow",
+      "Action": ["dynamodb:PutItem", "dynamodb:GetItem", "dynamodb:Query"],
+      "Resource": [
+        "arn:aws:dynamodb:us-east-1:ACCOUNT_ID:table/ic7-rag-history",
+        "arn:aws:dynamodb:us-east-1:ACCOUNT_ID:table/ic7-rag-requests"
+      ]
+    },
+    {
+      "Sid": "LeerSecretosDesdeSSM",
+      "Effect": "Allow",
+      "Action": ["ssm:GetParameter"],
+      "Resource": ["arn:aws:ssm:us-east-1:ACCOUNT_ID:parameter/ic7-rag/api-key"]
+    }
+  ]
+}

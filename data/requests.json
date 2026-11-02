@@ -1,0 +1,158 @@
+[
+  {
+    "request_id": "SOL-1001",
+    "titulo": "GESOL lento en cierre de mes",
+    "tipo": "Incidente",
+    "descripcion": "Durante el cierre de mes el portal GESOL tarda más de 8 segundos en cargar la bandeja de solicitudes. Afecta a las áreas de Finanzas y Compras.",
+    "sistema": "GESOL",
+    "area_solicitante": "Finanzas",
+    "estado": "En desarrollo",
+    "prioridad": "P2",
+    "usuarios_afectados": 45,
+    "grupo_resolutor": "Aplicaciones Corporativas",
+    "fecha_creacion": "2026-10-27T09:15:00-05:00",
+    "fecha_actualizacion": "2026-10-30T16:40:00-05:00",
+    "historial": [
+      {"fecha": "2026-10-27", "evento": "Registrada por el área de Finanzas"},
+      {"fecha": "2026-10-27", "evento": "Clasificada P2 por la mesa de servicio (20+ usuarios afectados)"},
+      {"fecha": "2026-10-28", "evento": "DBA identifica consultas LIKE sobre CLOB en búsqueda histórica"},
+      {"fecha": "2026-10-30", "evento": "Se prueba índice de texto Oracle Text en ambiente de pruebas"}
+    ],
+    "proximo_paso": "Aplicar índice Oracle Text en producción en la ventana del domingo 1 de noviembre"
+  },
+  {
+    "request_id": "SOL-1002",
+    "titulo": "Acceso a GESOL para nuevo analista de Compras",
+    "tipo": "Requerimiento de servicio",
+    "descripcion": "Se requiere crear el acceso y rol de analista en GESOL para un colaborador que ingresó al área de Compras.",
+    "sistema": "GESOL",
+    "area_solicitante": "Compras",
+    "estado": "Cerrada",
+    "prioridad": "P4",
+    "usuarios_afectados": 1,
+    "grupo_resolutor": "Mesa de Servicio",
+    "fecha_creacion": "2026-10-20T08:02:00-05:00",
+    "fecha_actualizacion": "2026-10-21T11:30:00-05:00",
+    "historial": [
+      {"fecha": "2026-10-20", "evento": "Registrada"},
+      {"fecha": "2026-10-21", "evento": "Usuario agregado a GG_GESOL_USUARIOS y rol asignado por administrador funcional"},
+      {"fecha": "2026-10-21", "evento": "Cerrada con confirmación del solicitante"}
+    ],
+    "proximo_paso": "Ninguno"
+  },
+  {
+    "request_id": "SOL-1003",
+    "titulo": "Falla en exportación de archivo de nómina",
+    "tipo": "Incidente",
+    "descripcion": "El proceso JOB_EXPORT_NOMINA terminó con error ORA-01652 y el archivo no se generó a tiempo.",
+    "sistema": "GESOL / Nómina",
+    "area_solicitante": "Gestión Humana",
+    "estado": "Resuelta",
+    "prioridad": "P2",
+    "usuarios_afectados": 3,
+    "grupo_resolutor": "Base de Datos",
+    "fecha_creacion": "2026-10-29T03:10:00-05:00",
+    "fecha_actualizacion": "2026-10-29T06:20:00-05:00",
+    "historial": [
+      {"fecha": "2026-10-29", "evento": "Alerta automática de Control-M"},
+      {"fecha": "2026-10-29", "evento": "DBA amplía tablespace temporal"},
+      {"fecha": "2026-10-29", "evento": "Job re-ejecutado con éxito a las 06:05"}
+    ],
+    "proximo_paso": "Esperar confirmación de Nómina para cerrar; crear alerta preventiva de espacio en tablespace"
+  },
+  {
+    "request_id": "SOL-1004",
+    "titulo": "API REST para consultar solicitudes desde el portal de empleados",
+    "tipo": "Cambio evolutivo",
+    "descripcion": "El portal de empleados necesita consultar el estado de sus solicitudes. GESOL no expone APIs REST; se requiere una capa de API.",
+    "sistema": "GESOL",
+    "area_solicitante": "Experiencia del Empleado",
+    "estado": "En análisis",
+    "prioridad": "P3",
+    "usuarios_afectados": 0,
+    "grupo_resolutor": "Arquitectura Empresarial",
+    "fecha_creacion": "2026-10-15T10:00:00-05:00",
+    "fecha_actualizacion": "2026-10-28T09:00:00-05:00",
+    "historial": [
+      {"fecha": "2026-10-15", "evento": "Registrada"},
+      {"fecha": "2026-10-28", "evento": "Arquitectura propone API Gateway + Lambda leyendo réplica de lectura (Fase 2 de modernización)"}
+    ],
+    "proximo_paso": "Estimar esfuerzo y presentar al Comité de Cambios"
+  },
+  {
+    "request_id": "SOL-1005",
+    "titulo": "Migración de base de datos GESOL a PostgreSQL administrado",
+    "tipo": "Cambio evolutivo",
+    "descripcion": "Migrar el esquema GESOL_OWN (420 GB) de Oracle 12c a Aurora PostgreSQL como parte de la Fase 1 de modernización.",
+    "sistema": "GESOL",
+    "area_solicitante": "Arquitectura Empresarial",
+    "estado": "Registrada",
+    "prioridad": "P3",
+    "usuarios_afectados": 0,
+    "grupo_resolutor": "Pendiente de asignar",
+    "fecha_creacion": "2026-10-30T14:00:00-05:00",
+    "fecha_actualizacion": "2026-10-30T14:00:00-05:00",
+    "historial": [
+      {"fecha": "2026-10-30", "evento": "Registrada"}
+    ],
+    "proximo_paso": "Análisis de compatibilidad con AWS Schema Conversion Tool"
+  },
+  {
+    "request_id": "SOL-1006",
+    "titulo": "Portal de clientes caído",
+    "tipo": "Incidente",
+    "descripcion": "El portal de clientes devuelve error 503 para todos los usuarios. No existe alternativa de atención en línea.",
+    "sistema": "Portal de clientes",
+    "area_solicitante": "Servicio al Cliente",
+    "estado": "Cerrada",
+    "prioridad": "P1",
+    "usuarios_afectados": 1200,
+    "grupo_resolutor": "Guardia de Infraestructura",
+    "fecha_creacion": "2026-10-12T19:45:00-05:00",
+    "fecha_actualizacion": "2026-10-16T10:00:00-05:00",
+    "historial": [
+      {"fecha": "2026-10-12", "evento": "Registrada como P1"},
+      {"fecha": "2026-10-12", "evento": "Certificado TLS vencido identificado y renovado (21:10)"},
+      {"fecha": "2026-10-16", "evento": "Postmortem publicado; acción: alertas de vencimiento de certificados a 30 días"}
+    ],
+    "proximo_paso": "Ninguno"
+  },
+  {
+    "request_id": "SOL-1007",
+    "titulo": "Reporte mensual de cumplimiento de SLA por área",
+    "tipo": "Requerimiento de servicio",
+    "descripcion": "La Gerencia de Operaciones solicita un reporte mensual automático con el porcentaje de cumplimiento de SLA por área y prioridad.",
+    "sistema": "GESOL",
+    "area_solicitante": "Gerencia de Operaciones de TI",
+    "estado": "En pruebas",
+    "prioridad": "P3",
+    "usuarios_afectados": 0,
+    "grupo_resolutor": "Aplicaciones Corporativas",
+    "fecha_creacion": "2026-10-05T11:20:00-05:00",
+    "fecha_actualizacion": "2026-10-29T15:00:00-05:00",
+    "historial": [
+      {"fecha": "2026-10-05", "evento": "Registrada"},
+      {"fecha": "2026-10-19", "evento": "Desarrollo del reporte sobre tablas de JOB_REPORTES"},
+      {"fecha": "2026-10-29", "evento": "Publicado en pruebas para validación de la Gerencia"}
+    ],
+    "proximo_paso": "Validación funcional por la Gerencia de Operaciones"
+  },
+  {
+    "request_id": "SOL-1008",
+    "titulo": "Solicitud duplicada de acceso VPN",
+    "tipo": "Requerimiento de servicio",
+    "descripcion": "Solicitud de acceso VPN ya atendida en otra solicitud.",
+    "sistema": "VPN",
+    "area_solicitante": "Comercial",
+    "estado": "Rechazada",
+    "prioridad": "P4",
+    "usuarios_afectados": 1,
+    "grupo_resolutor": "Mesa de Servicio",
+    "fecha_creacion": "2026-10-22T08:30:00-05:00",
+    "fecha_actualizacion": "2026-10-22T09:00:00-05:00",
+    "historial": [
+      {"fecha": "2026-10-22", "evento": "Rechazada: duplicada"}
+    ],
+    "proximo_paso": "Ninguno"
+  }
+]

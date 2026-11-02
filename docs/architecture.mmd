@@ -1,0 +1,34 @@
+flowchart LR
+    U["Usuario / Cliente<br/>(Swagger UI, curl, portal)"] -->|"HTTPS + X-API-Key"| FURL["Lambda Function URL"]
+
+    subgraph AWS["AWS · us-east-1"]
+        FURL --> L["AWS Lambda · Python 3.13<br/>FastAPI + Mangum<br/>ic7-rag-agent"]
+
+        subgraph APP["Dentro de la Lambda"]
+            direction TB
+            G1["Guardrail de entrada<br/>validación + prompt injection"] --> R["Retriever<br/>top-k + umbral"]
+            R --> A["Agente<br/>loop Converse + tool use"]
+            A --> T["Herramientas<br/>estado · prioridad · esfuerzo · servicios cloud"]
+            A --> G2["Guardrail de salida<br/>canario + citas [n]"]
+            I["Ingesta<br/>extracción → chunking → embeddings"]
+        end
+
+        L --- APP
+        I -->|"original"| S3[("Amazon S3<br/>ic7-rag-docs")]
+        I -->|"vectores + metadata"| SV[("Amazon S3 Vectors<br/>docs-index · coseno · 1024")]
+        R -->|"QueryVectors"| SV
+        I -->|"Titan Embeddings V2"| BR["Amazon Bedrock"]
+        R -->|"Titan Embeddings V2"| BR
+        A -->|"Converse · Nova Lite"| BR
+        T -->|"GetItem"| DDBR[("DynamoDB<br/>ic7-rag-requests")]
+        G2 -->|"traza de la interacción"| DDBH[("DynamoDB<br/>ic7-rag-history")]
+        L -->|"logs JSON con trace_id"| CW["CloudWatch Logs"]
+        L -->|"API key (SecureString)"| SSM["SSM Parameter Store"]
+    end
+
+    classDef store fill:#eef6ff,stroke:#3b82f6,color:#0f172a
+    classDef svc fill:#fff7ed,stroke:#f97316,color:#0f172a
+    classDef guard fill:#fef2f2,stroke:#ef4444,color:#0f172a
+    class S3,SV,DDBR,DDBH store
+    class BR,CW,SSM,FURL svc
+    class G1,G2 guard
