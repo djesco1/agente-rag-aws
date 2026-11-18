@@ -3,8 +3,7 @@
 Asistente inteligente que **consulta documentación interna**, **responde con base en fuentes citadas**, **ejecuta acciones mediante herramientas** y **deja trazabilidad** de cada interacción. Está construido con **Python (FastAPI)** y desplegado en **AWS**: Lambda, Bedrock, S3 Vectors, DynamoDB, SSM y CloudWatch.
 
 > Prueba técnica · AI Developer Engineer Semi-senior · Ruta AWS
->
-> 🎥 **Video de la solución:** _(pega aquí el enlace)_
+
 
 ![Arquitectura](docs/architecture_aws.png)
 
